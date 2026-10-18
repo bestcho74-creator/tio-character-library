@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="교사크리에이터협회 TIO 캐릭터 원형과 표정, 포즈, 활용 레퍼런스 및 프롬프트 라이브러리">
+  <title>교사크리에이터협회 캐릭터 레퍼 for AI</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./catalog.js"></script>
+  <script defer src="./prompts.js"></script>
+  <script defer src="./motion.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#mainContent">본문 바로가기</a>
+  <header class="site-header">
+    <a class="brand" href="./" aria-label="교사크리에이터협회 캐릭터 레퍼 for AI 처음으로">
+      <span class="brand-symbol" id="brandSymbol" aria-hidden="true">TIO<span>.</span></span>
+      <span class="brand-name"><strong>교사크리에이터협회</strong><span>캐릭터 레퍼 for AI</span></span>
+    </a>
+    <div class="header-actions">
+      <span class="internal-label"><span class="status-dot"></span>협회 내부 활용</span>
+      <button class="button button-quiet help-button" type="button" id="helpButton"><span data-icon="help"></span><span>처음이라면</span></button>
+      <a class="button button-dark header-download" id="masterDownload" href="#" download aria-disabled="true"><span data-icon="download"></span><span>원형 다운로드</span></a>
+    </div>
+  </header>
+
+  <main id="mainContent" class="app-main" tabindex="-1">
+    <section class="hero" aria-label="캐릭터 라이브러리 소개">
+      <div id="heroHorizon" class="hero-horizon" aria-hidden="true"></div>
+      <div class="hero-copy"><p class="eyebrow">TEACHER CREATOR ASSOCIATION</p><h1><span>교사크리에이터협회</span>캐릭터 레퍼 <em>for AI<span class="title-dot">.</span></em></h1><p class="hero-description">원형은 그대로, 창작은 더 다양하게.<br>원형 이미지와 마스터 프롬프트부터 준비하세요.</p><div class="hero-actions"><button type="button" class="button button-dark" id="enterLibrary">마스터 프롬프트로 시작<span data-icon="arrow-right"></span></button><span class="version-pill" id="versionPill">검토본</span></div></div>
+      <div id="heroMedia" class="hero-media"></div>
+      <div class="hero-motion-controls"><button type="button" class="icon-button" id="heroMotionToggle" aria-label="배경 모션 일시정지"><span data-icon="pause"></span></button><button type="button" class="hero-motion-replay" id="heroMotionReplay">다시보기</button></div>
+    </section>
+
+    <section id="masterStudio" class="master-studio" aria-labelledby="masterStudioTitle">
+      <div class="master-character-column"><div class="master-character-label"><span>THE ORIGINAL TIO</span><span class="master-source-chip">지정 원형</span></div><button class="master-character-frame checkerboard" id="masterExpand" type="button" aria-label="지정된 TIO 원형 크게 보기"><img id="masterCharacter" src="./assets/TIO_master_transparent.png" alt="사용자가 지정한 TIO 캐릭터 원형"><span class="master-zoom-label"><span data-icon="expand"></span>크게 보기</span></button><div class="master-character-bottom"><span>원형 그대로 다운로드</span><div><a id="studioMasterDownload" class="button button-quiet button-small" href="#" aria-disabled="true" download><span data-icon="download"></span>원본 PNG</a><a id="studioTransparentDownload" class="button button-quiet button-small" href="#" aria-disabled="true" download><span data-icon="download"></span>투명 PNG</a></div></div><div class="master-palette"><span>COLOR CHART <small>눌러서 HEX 복사</small></span><div><button type="button" data-copy-hex="#E41E26" aria-label="빨강 E41E26 색상 코드 복사"><i style="background:#E41E26"></i><span>#E41E26</span></button><button type="button" data-copy-hex="#FFB200" aria-label="노랑 FFB200 색상 코드 복사"><i style="background:#FFB200"></i><span>#FFB200</span></button><button type="button" data-copy-hex="#2B2B2B" aria-label="진회색 2B2B2B 색상 코드 복사"><i style="background:#2B2B2B"></i><span>#2B2B2B</span></button><button type="button" data-copy-hex="#F3F3F3" aria-label="연회색 F3F3F3 색상 코드 복사"><i style="background:#F3F3F3"></i><span>#F3F3F3</span></button><button type="button" data-copy-hex="#FFFFFF" aria-label="흰색 FFFFFF 색상 코드 복사"><i style="background:#FFFFFF"></i><span>#FFFFFF</span></button></div></div></div>
+      <div class="master-prompt-column"><div class="master-studio-heading"><div><p class="eyebrow">MASTER STUDIO</p><h2 id="masterStudioTitle">이 원형으로 시작하세요.</h2></div><button type="button" class="button button-quiet button-small" id="masterGuide"><span data-icon="help"></span>사용법</button></div><div class="master-records"><div><span>내부 관리 ID</span><strong id="masterInternalId">TIO-MASTER-20261018-001</strong></div><div><span>작업용 고정 시드</span><strong id="masterSeed" title="원본 생성 시드를 복원한 값이 아닌 이 라이브러리의 작업용 설정입니다.">제공되지 않음</strong></div><div><span>생성 ID</span><strong id="masterJobId">제공되지 않음</strong></div><div><span>Higgsfield 캐릭터 ID</span><strong id="masterCharacterId">제공되지 않음</strong></div></div><div class="reproduction-row"><p id="originalSeedNote">원본 생성 시드: 미제공 · 시드 지원 모델 설정에 입력</p><button type="button" id="copyReproduction" class="button button-quiet button-small"><span data-icon="copy"></span>재현 설정 복사</button></div><div class="master-prompt-box"><div class="master-prompt-label"><label for="masterPromptText">마스터 프롬프트</label><button type="button" id="masterCopy" class="button button-dark button-small"><span data-icon="copy"></span>한 번에 복사</button></div><textarea id="masterPromptText" readonly spellcheck="false" aria-label="지정 원형의 마스터 프롬프트"></textarea></div><div class="master-application-row"><div><label for="masterApplicationSelect">다른 장면도 만들고 싶다면</label><select id="masterApplicationSelect"><option value="">응용 프롬프트 선택</option></select></div><button id="masterCombinedCopy" type="button" class="button button-dark" disabled><span data-icon="copy"></span>마스터 + 응용 복사</button></div><div id="masterFormatChips" class="format-chips master-format-chips"><span class="format-placeholder">응용을 선택하면 크기와 비율을 보여드려요.</span></div><p class="master-caution"><span data-icon="info"></span>원형 이미지도 AI에 함께 첨부해 주세요. 캐릭터 ID는 등록한 Higgsfield 계정의 지원 모델용이며, 다른 AI의 공통 ID가 아닙니다.</p></div>
+    </section>
+    <div class="reference-section-heading"><div><p class="eyebrow">REFERENCE ALBUM</p><h2>필요할 때, 레퍼런스 더하기</h2></div><p>표정 · 포즈 · 콘텐츠 활용 예시</p></div>
+    <div class="workspace" id="referenceWorkspace">
+      <aside class="sidebar" aria-label="라이브러리 메뉴">
+        <p class="nav-label">LIBRARY</p>
+        <nav id="categoryNav" class="category-nav" aria-label="카테고리"></nav>
+        <div class="sidebar-bottom">
+          <div class="reference-note"><span data-icon="shield"></span><p><strong>원형이 기준이에요</strong><span>외형을 확인할 때는<br>원형 이미지와 비교해 주세요.</span></p></div>
+          <a class="association-link" href="https://t-creator.com/53" target="_blank" rel="noopener noreferrer">협회 홈페이지<span data-icon="arrow-up-right"></span></a>
+        </div>
+      </aside>
+
+      <section id="galleryView" class="library-view" aria-labelledby="galleryTitle">
+        <div class="content-toolbar">
+          <div class="section-title"><h2 id="galleryTitle">원형 & 시트</h2><span id="resultCount" class="count-label"></span></div>
+          <form id="searchForm" class="search-box" role="search"><span data-icon="search"></span><input id="searchInput" type="search" placeholder="이름, 표정, 용도로 검색" aria-label="레퍼런스 검색" autocomplete="off"><kbd aria-hidden="true">/</kbd></form>
+        </div>
+        <div class="filter-row"><div id="subfilters" class="filter-chips" aria-label="세부 분류"></div><label class="transparent-filter"><input id="transparentFilter" type="checkbox"><span>투명 PNG</span></label></div>
+        <section id="dealSection" class="deal-section" hidden aria-label="움직이는 활용 레퍼런스 앨범"><div id="dealStage" class="deal-stage"></div><div class="deal-controls"><p id="dealHint">카드를 선택하면 이미지와 프롬프트를 볼 수 있어요.</p><div><button type="button" class="button button-quiet button-small" id="dealToggle"><span data-icon="play"></span><span>모션 재생</span></button><button type="button" class="button button-quiet button-small" id="dealReplay">다시보기</button></div></div><div id="dealAssetNames" class="deal-asset-names" aria-label="현재 활용 레퍼런스"></div></section>
+        <div id="assetGrid" class="asset-grid" aria-label="캐릭터 이미지 앨범"></div>
+        <div class="gallery-bottom"><p id="galleryHint">이미지를 선택하면 자세히 볼 수 있어요.</p><nav id="pagination" class="pagination" aria-label="앨범 페이지"></nav></div>
+      </section>
+
+      <aside id="detailPanel" class="detail-panel" aria-label="선택한 레퍼런스 상세"></aside>
+
+      <section id="promptsView" class="utility-view" aria-labelledby="promptsTitle" hidden>
+        <div class="utility-heading"><div><p class="eyebrow">PROMPT STUDIO</p><h2 id="promptsTitle">원형을 지키는 한 번의 복사</h2><p>원형 이미지도 AI에 함께 첨부해 주세요.</p></div><span class="label-chip">초보자도 간편하게</span></div>
+        <div class="prompt-layout">
+          <div class="prompt-controls"><label class="field-label" for="promptAssetSelect">어떤 이미지를 만들까요?</label><select id="promptAssetSelect"></select><div id="promptAssetSummary" class="prompt-asset-summary"></div><div class="mini-guide"><span class="step-number">1</span><p><strong>원형 이미지 첨부</strong>AI 채팅창에 원형 파일을 올려 주세요.</p><span class="step-number">2</span><p><strong>통합 프롬프트 붙여넣기</strong>외형 규칙과 선택한 응용 내용이 함께 복사돼요.</p><span class="step-number">3</span><p><strong>원형과 결과 비교</strong>모양·색·눈·팔다리가 달라지지 않았는지 확인해요.</p></div><button class="button button-dark full-width" id="promptCopyAll" type="button"><span data-icon="copy"></span>통합 프롬프트 복사</button></div>
+          <div class="prompt-editor"><div class="prompt-tabs" role="tablist" aria-label="프롬프트 종류"><button type="button" role="tab" data-prompt-tab="combined" aria-selected="true" id="prompt-tab-combined" aria-controls="promptTextPanel">통합</button><button type="button" role="tab" data-prompt-tab="master" aria-selected="false" id="prompt-tab-master" aria-controls="promptTextPanel" tabindex="-1">마스터</button><button type="button" role="tab" data-prompt-tab="application" aria-selected="false" id="prompt-tab-application" aria-controls="promptTextPanel" tabindex="-1">응용</button><button type="button" role="tab" data-prompt-tab="negative" aria-selected="false" id="prompt-tab-negative" aria-controls="promptTextPanel" tabindex="-1">외형 유지 규칙</button></div><div id="promptTextPanel" class="prompt-text-panel" role="tabpanel" aria-labelledby="prompt-tab-combined"><div class="prompt-text-heading"><span id="promptTextTitle">통합 프롬프트</span><button id="promptCopyCurrent" class="icon-button" type="button" aria-label="현재 프롬프트 복사"><span data-icon="copy"></span></button></div><textarea id="promptText" readonly aria-label="복사할 프롬프트 내용" spellcheck="false"></textarea></div><p class="prompt-footnote"><span data-icon="info"></span>같은 시드도 AI 모델이 바뀌면 다른 결과가 나올 수 있어요.</p></div>
+        </div>
+      </section>
+
+      <section id="toolsView" class="utility-view" aria-labelledby="toolsTitle" hidden>
+        <div class="utility-heading"><div><p class="eyebrow">CREATE WITH TIO</p><h2 id="toolsTitle">준비한 이미지로 시작해요</h2><p>원형 이미지와 통합 프롬프트를 준비한 뒤 원하는 AI를 열어 주세요.</p></div></div>
+        <div id="toolsGrid" class="tools-grid"></div>
+        <div class="tool-reminder"><span data-icon="image"></span><div><strong>이미지를 먼저 첨부하면 좋아요.</strong><p>프롬프트만으로 동일한 외형을 보장할 수는 없어요. 승인된 원형을 참고 이미지로 사용하고 결과를 비교해 주세요.</p></div><button class="button button-quiet" type="button" data-go="prompts">프롬프트 준비하기<span data-icon="arrow-right"></span></button></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer"><span>© 교사크리에이터협회</span><span id="footerVersion">TIO CHARACTER LIBRARY</span><button type="button" id="footerHelp">사용 방법<span data-icon="arrow-up-right"></span></button></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="assetDialog" class="asset-dialog" aria-labelledby="modalAssetTitle"><div class="dialog-topbar"><span>REFERENCE DETAIL</span><button class="icon-button" data-close-dialog type="button" aria-label="상세 보기 닫기"><span data-icon="close"></span></button></div><div id="modalAssetContent" class="modal-asset-content"></div></dialog>
+  <dialog id="helpDialog" class="help-dialog" aria-labelledby="helpTitle"><div class="dialog-topbar"><span>QUICK START</span><button class="icon-button" data-close-dialog type="button" aria-label="사용 방법 닫기"><span data-icon="close"></span></button></div><div class="help-content"><div class="help-symbol">TIO<span>.</span></div><h2 id="helpTitle">세 단계면 준비 끝.</h2><p class="help-intro">어떤 AI를 쓰든, 원형 이미지를 함께 참고하게 해 주세요.</p><ol class="help-steps"><li><span>01</span><div><strong>원형 이미지를 다운로드해요</strong><p>‘원형 & 시트’에서 기준이 될 이미지를 고르고 내려받으세요.</p></div></li><li><span>02</span><div><strong>원하는 응용 프롬프트를 복사해요</strong><p>표정·포즈·용도를 선택하고 ‘통합 프롬프트 복사’를 누르면 돼요.</p></div></li><li><span>03</span><div><strong>AI에 이미지와 프롬프트를 함께 넣어요</strong><p>완성된 이미지의 몸체·색상·눈·팔다리를 원형과 비교해 주세요.</p></div></li></ol><p class="help-note">시드는 해당 모델의 생성 기록이에요. 다른 AI에서 같은 외형을 보장하는 공통 번호는 아닙니다.</p><button class="button button-dark full-width" type="button" data-close-dialog>알겠어요, 시작할게요<span data-icon="arrow-right"></span></button></div></dialog>
+  <dialog id="copyDialog" class="copy-dialog" aria-labelledby="copyTitle"><div class="dialog-topbar"><span id="copyTitle">프롬프트 직접 복사</span><button class="icon-button" data-close-dialog type="button" aria-label="복사 창 닫기"><span data-icon="close"></span></button></div><p>자동 복사가 제한되어 있어요. 아래 선택된 내용을 복사해 주세요.</p><textarea id="copyFallbackText" readonly aria-label="직접 복사할 내용"></textarea></dialog>
+</body>
+</html>
