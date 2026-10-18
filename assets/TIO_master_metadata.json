@@ -1,0 +1,74 @@
+{
+  "version": "2.0-official-master",
+  "name": "TIO official master",
+  "sourceFile": "Restore-this-exact-provided-mascot-as-a.png",
+  "originalAsset": "assets/TIO_master_original.png",
+  "transparentAsset": "assets/TIO_master_transparent.png",
+  "width": 1024,
+  "height": 1024,
+  "sourceSha256": "8997d36344585b822fece32e91884bb8e3fcaa9067f8f0650b7ec1e6408eb4f1",
+  "transparentSha256": "7055e791ff3ad46c259796c678464d11be421b134e0403c2cf52705048d49fa9",
+  "jobId": "fb354839-756c-4a37-83f7-d325f969a9dc",
+  "jobIdEvidence": "PNG tEXt hf-job-id and Higgsfield job_display returned the same completed job",
+  "jobStatus": "completed",
+  "model": "gpt_image_2_5",
+  "seed": null,
+  "seedStatus": "not_returned_by_source_job",
+  "seedExplanationKo": "원본 PNG와 힉스필드 원본 작업 정보에 시드가 제공되지 않았습니다. 시드 값을 임의로 만들지 않았습니다.",
+  "mediaId": "7425a1e3-3716-49b2-bd07-b41bad636b4f",
+  "mediaUrl": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GI0OhcvfGmwkYcPG279XOimdN2/7425a1e3-3716-49b2-bd07-b41bad636b4f.png",
+  "transparentMediaId": "7c7345a8-da6b-4a1c-a163-38894cb501e3",
+  "transparentUrl": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GI0OhcvfGmwkYcPG279XOimdN2/7c7345a8-da6b-4a1c-a163-38894cb501e3.png",
+  "referenceElementId": "b6aab7dd-62dd-4b40-84a9-3503571a6437",
+  "referenceElementName": "TIO official master",
+  "referenceElementStatus": "completed",
+  "referenceElementPromptToken": "<<<b6aab7dd-62dd-4b40-84a9-3503571a6437>>>",
+  "referenceUsageNoteKo": "힉스필드 지원 모델의 프롬프트에서 참조 토큰을 사용합니다. 다른 AI에서는 원본 이미지를 직접 첨부해야 하며, ID나 시드만으로 외형이 고정되지는 않습니다.",
+  "backgroundRemoval": {
+    "method": "Neutral white background alpha extraction with local edge matte decontamination; no generation or resizing",
+    "characterBbox": [
+      202,
+      159,
+      820,
+      832
+    ],
+    "fullyOpaqueRgbChangedPixels": 0,
+    "transparentPixels": 816946,
+    "partiallyTransparentPixels": 4272
+  },
+  "sourceJob": {
+    "id": "fb354839-756c-4a37-83f7-d325f969a9dc",
+    "type": "image",
+    "status": "completed",
+    "model": "gpt_image_2_5",
+    "params": {
+      "prompt": "Restore this exact provided mascot as a pristine high resolution animation master keyframe. This is strict fidelity restoration, preserve the identical silhouette, proportions, rolled red ribbon folded into a right pointing triangular T/play shape, yellow-orange triangular lower face, rounded darker red rolled fold at upper left, exact same two thin black arms with circular mitten hands and two thin black legs with oval feet. Preserve the existing eye positions, simple black oval eyes, smiling open black mouth with small red tongue, two soft pink circular cheek blush shapes, front facing pose. Keep the exact pose and centered framing. One character only, whole body fully visible, character occupies about 65 percent of square frame height. Clean precise vector-like contour edges with smooth antialiasing. Colors: rich red #E41E26, warm golden yellow #FFB200, near-black limbs. Flat clean solid color fills; only one subtle broad smoothly blended shade on the folded red ribbon to retain its shape. Uniform immaculate continuous color fields. Remove all dirt, freckles, speckles, dark dots on the red surface, mottling, grain, canvas texture, watercolor texture, gradients with banding and JPEG artifacts. Keep deliberate cheek blush separate and neat. Background absolutely pure uniform white #FFFFFF, completely empty. Remove the tiny pink mark under the feet and any ground shadow. No text, no extra marks, no decorations, no border, no redesign, no 3D material, no plastic highlights. Output one polished sharp mascot keyframe suitable for premium educational webapp animation.",
+      "aspect_ratio": "1:1",
+      "medias": [
+        {
+          "role": "image",
+          "data": {
+            "id": "0c927c40-2df8-48d0-bdbe-072351f169e7",
+            "type": "media_input",
+            "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3GI0OhcvfGmwkYcPG279XOimdN2/0c927c40-2df8-48d0-bdbe-072351f169e7.png"
+          }
+        }
+      ],
+      "width": 1024,
+      "height": 1024,
+      "quality": "low",
+      "resolution": "1k",
+      "model": "flare",
+      "remove_bg": false,
+      "reference_elements": []
+    },
+    "results": {
+      "rawUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3GI0OhcvfGmwkYcPG279XOimdN2/hf_20261018_003334_fb354839-756c-4a37-83f7-d325f969a9dc.png",
+      "minUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3GI0OhcvfGmwkYcPG279XOimdN2/hf_20261018_003334_fb354839-756c-4a37-83f7-d325f969a9dc_min.webp"
+    },
+    "createdAt": 1792283614.945824,
+    "liked": false
+  },
+  "workingSeed": 160944995,
+  "workingSeedExplanationKo": "원형 파일의 SHA256 앞 32비트를 31비트 양의 정수로 변환한 프로젝트 작업용 시드. 원본 생성 시드가 아니며, 같은 결과를 보장하지 않습니다."
+}

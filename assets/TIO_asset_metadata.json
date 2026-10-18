@@ -1,0 +1,603 @@
+{
+  "version": "1.1-reviewed",
+  "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3GI0OhcvfGmwkYcPG279XOimdN2/hf_20261018_002306_53411b27-5557-4c21-b240-ddf2dfb9ebe4.png",
+  "source_size": [
+    4096,
+    2737
+  ],
+  "source_sha256": "783c72dd55fe1c3a5f8a48c1108c921d4fcb2922931e7f6c9badf92ec2105cd0",
+  "approval_basis": "User selected Higgsfield upscale as visual basis",
+  "generation_used": false,
+  "seed": null,
+  "seed_note": "Pixel-derived edits have no generation seed; no seed fabricated",
+  "extraction": "Native-resolution crops; source RGB retained; neutral bright background removed by alpha; enclosed white prop interiors retained within listed regions; 32 px transparent padding",
+  "alpha_formula": "max(clamp((190-minRGB)/55),clamp((maxRGB-minRGB-45)/45))*255; remove components under 12px",
+  "repair": {
+    "canvas_size_preserved": true,
+    "allowed_edit_bbox_xyxy": [
+      2040,
+      2595,
+      3152,
+      2720
+    ],
+    "actual_changed_bbox_xyxy": [
+      2040,
+      2595,
+      3152,
+      2720
+    ],
+    "outside_patch_changed_pixels": 0,
+    "changed_pixel_count": 121656,
+    "panel_bottom_shift_px": 72,
+    "donors": [
+      {
+        "side": "left",
+        "source_bbox_xyxy": [
+          1235,
+          605,
+          1307,
+          688
+        ],
+        "destination_xy": [
+          2296,
+          2616
+        ],
+        "scale": 0.85,
+        "output_size": [
+          61,
+          71
+        ],
+        "method": "copy dark source pixels and resize with Lanczos; no generated anatomy"
+      },
+      {
+        "side": "right",
+        "source_bbox_xyxy": [
+          1368,
+          589,
+          1443,
+          688
+        ],
+        "destination_xy": [
+          2392,
+          2603
+        ],
+        "scale": 0.85,
+        "output_size": [
+          64,
+          84
+        ],
+        "method": "copy dark source pixels and resize with Lanczos; no generated anatomy"
+      }
+    ],
+    "left_leg_original_stump_restored_bbox_xyxy": [
+      2320,
+      2619,
+      2365,
+      2645
+    ]
+  },
+  "assets": [
+    {
+      "filename": "01_front.png",
+      "category": "original",
+      "label_ko": "정면",
+      "source_bbox_xyxy": [
+        1133,
+        203,
+        1605,
+        704
+      ],
+      "trimmed_source_bbox_xyxy": [
+        1137,
+        216,
+        1578,
+        686
+      ],
+      "padding_px": 32,
+      "width": 505,
+      "height": 534,
+      "white_interior_preservation_regions": [],
+      "sha256": "32d80f93ad692a98c4817f317e031907ed4ca620c54745adf56c79090d0a2089"
+    },
+    {
+      "filename": "02_side.png",
+      "category": "original",
+      "label_ko": "측면",
+      "source_bbox_xyxy": [
+        1707,
+        205,
+        2040,
+        696
+      ],
+      "trimmed_source_bbox_xyxy": [
+        1713,
+        218,
+        2024,
+        682
+      ],
+      "padding_px": 32,
+      "width": 375,
+      "height": 528,
+      "white_interior_preservation_regions": [],
+      "sha256": "3582659a3fdbcadac4405fe3760b9707011cf6a28be33c5a8fe1f1d91d7f94e0"
+    },
+    {
+      "filename": "03_back.png",
+      "category": "original",
+      "label_ko": "후면",
+      "source_bbox_xyxy": [
+        2112,
+        203,
+        2608,
+        701
+      ],
+      "trimmed_source_bbox_xyxy": [
+        2128,
+        216,
+        2571,
+        682
+      ],
+      "padding_px": 32,
+      "width": 507,
+      "height": 530,
+      "white_interior_preservation_regions": [],
+      "sha256": "9ccb4bba655c1e5a1c551b3f085c185be5709f1f810bde3cf83e53394a80874f"
+    },
+    {
+      "filename": "04_expression_smile.png",
+      "category": "expression",
+      "label_ko": "기본 미소",
+      "source_bbox_xyxy": [
+        2736,
+        208,
+        3112,
+        520
+      ],
+      "trimmed_source_bbox_xyxy": [
+        2760,
+        217,
+        3100,
+        510
+      ],
+      "padding_px": 32,
+      "width": 404,
+      "height": 357,
+      "white_interior_preservation_regions": [],
+      "sha256": "58ebee66476a3b19abd7ef0db0071b369e1b4eff692a05f39676282891d55bb8"
+    },
+    {
+      "filename": "05_expression_wink.png",
+      "category": "expression",
+      "label_ko": "윙크",
+      "source_bbox_xyxy": [
+        3176,
+        173,
+        3560,
+        525
+      ],
+      "trimmed_source_bbox_xyxy": [
+        3196,
+        184,
+        3539,
+        512
+      ],
+      "padding_px": 32,
+      "width": 407,
+      "height": 392,
+      "white_interior_preservation_regions": [],
+      "sha256": "a0e05f742e4b30f302d5ce3fa98c87372c8fc28a87363a0842fc627cfa63a463"
+    },
+    {
+      "filename": "06_expression_excited.png",
+      "category": "expression",
+      "label_ko": "신남",
+      "source_bbox_xyxy": [
+        3619,
+        125,
+        4000,
+        525
+      ],
+      "trimmed_source_bbox_xyxy": [
+        3636,
+        139,
+        3991,
+        512
+      ],
+      "padding_px": 32,
+      "width": 419,
+      "height": 437,
+      "white_interior_preservation_regions": [],
+      "sha256": "099fe50142c403a83a63adedef2ee98a0543d2dfdbc21d5269300eb38c662ec5"
+    },
+    {
+      "filename": "07_expression_surprised.png",
+      "category": "expression",
+      "label_ko": "놀람",
+      "source_bbox_xyxy": [
+        2741,
+        611,
+        3083,
+        1003
+      ],
+      "trimmed_source_bbox_xyxy": [
+        2766,
+        626,
+        3061,
+        990
+      ],
+      "padding_px": 32,
+      "width": 359,
+      "height": 428,
+      "white_interior_preservation_regions": [],
+      "sha256": "1e72139b3c7e1eeb7638df4b661decabb23ec5445d2c128909571d7bc6f3fe5a"
+    },
+    {
+      "filename": "08_expression_curious.png",
+      "category": "expression",
+      "label_ko": "궁금",
+      "source_bbox_xyxy": [
+        3176,
+        611,
+        3525,
+        1005
+      ],
+      "trimmed_source_bbox_xyxy": [
+        3201,
+        632,
+        3512,
+        990
+      ],
+      "padding_px": 32,
+      "width": 375,
+      "height": 422,
+      "white_interior_preservation_regions": [],
+      "sha256": "bcf542a8b4c066ae3040c13c348db9ae77735462cff42093f54521f61148b261"
+    },
+    {
+      "filename": "09_expression_proud.png",
+      "category": "expression",
+      "label_ko": "뿌듯",
+      "source_bbox_xyxy": [
+        3619,
+        667,
+        4000,
+        1005
+      ],
+      "trimmed_source_bbox_xyxy": [
+        3648,
+        681,
+        3976,
+        990
+      ],
+      "padding_px": 32,
+      "width": 392,
+      "height": 373,
+      "white_interior_preservation_regions": [],
+      "sha256": "d638a4eeac6421e0443dfe54a94152da79c71446193f2be83e644838ab1ba95a"
+    },
+    {
+      "filename": "10_pose_running.png",
+      "category": "pose",
+      "label_ko": "달려요",
+      "source_bbox_xyxy": [
+        1131,
+        1051,
+        1517,
+        1384
+      ],
+      "trimmed_source_bbox_xyxy": [
+        1138,
+        1070,
+        1498,
+        1372
+      ],
+      "padding_px": 32,
+      "width": 424,
+      "height": 366,
+      "white_interior_preservation_regions": [],
+      "sha256": "1ae7cb2c65d786480c7e2fa37753a9918355b77ce4e709af95714f9858578412"
+    },
+    {
+      "filename": "11_pose_cheering.png",
+      "category": "pose",
+      "label_ko": "응원해요",
+      "source_bbox_xyxy": [
+        1571,
+        963,
+        2080,
+        1389
+      ],
+      "trimmed_source_bbox_xyxy": [
+        1588,
+        973,
+        2065,
+        1373
+      ],
+      "padding_px": 32,
+      "width": 541,
+      "height": 464,
+      "white_interior_preservation_regions": [
+        [
+          1893,
+          976,
+          2067,
+          1104
+        ]
+      ],
+      "sha256": "49cbf65d9e8d6a6c08590f181aeaf1a53a015e9941abbad36e6edf9c99d63286"
+    },
+    {
+      "filename": "12_pose_like.png",
+      "category": "pose",
+      "label_ko": "좋아요",
+      "source_bbox_xyxy": [
+        2101,
+        1080,
+        2493,
+        1387
+      ],
+      "trimmed_source_bbox_xyxy": [
+        2121,
+        1104,
+        2481,
+        1378
+      ],
+      "padding_px": 32,
+      "width": 424,
+      "height": 338,
+      "white_interior_preservation_regions": [
+        [
+          2347,
+          1147,
+          2488,
+          1267
+        ]
+      ],
+      "sha256": "e8319eae4b431df0bb166425c8fa1fe56115e23d3776d7542bff552c272f5dad"
+    },
+    {
+      "filename": "13_pose_thinking.png",
+      "category": "pose",
+      "label_ko": "생각 중",
+      "source_bbox_xyxy": [
+        2536,
+        1088,
+        2960,
+        1387
+      ],
+      "trimmed_source_bbox_xyxy": [
+        2554,
+        1103,
+        2942,
+        1377
+      ],
+      "padding_px": 32,
+      "width": 452,
+      "height": 338,
+      "white_interior_preservation_regions": [
+        [
+          2805,
+          1104,
+          2947,
+          1227
+        ]
+      ],
+      "sha256": "09939cd9f286e2f4d8823aaf3b8550de587f91a68eda58b2b2eb944f736e6215"
+    },
+    {
+      "filename": "14_use_laptop.png",
+      "category": "usage",
+      "label_ko": "노트북과 함께",
+      "source_bbox_xyxy": [
+        155,
+        1608,
+        651,
+        1981
+      ],
+      "trimmed_source_bbox_xyxy": [
+        174,
+        1632,
+        629,
+        1966
+      ],
+      "padding_px": 32,
+      "width": 519,
+      "height": 398,
+      "white_interior_preservation_regions": [
+        [
+          171,
+          1797,
+          491,
+          1965
+        ]
+      ],
+      "sha256": "5f6540c515fd760863c50438af96256cc1596c9041e798c0670f04950624b53f"
+    },
+    {
+      "filename": "15_use_reading.png",
+      "category": "usage",
+      "label_ko": "책과 함께",
+      "source_bbox_xyxy": [
+        739,
+        1576,
+        1325,
+        1981
+      ],
+      "trimmed_source_bbox_xyxy": [
+        753,
+        1588,
+        1312,
+        1960
+      ],
+      "padding_px": 32,
+      "width": 623,
+      "height": 436,
+      "white_interior_preservation_regions": [
+        [
+          749,
+          1848,
+          896,
+          1968
+        ],
+        [
+          1160,
+          1864,
+          1309,
+          1963
+        ],
+        [
+          1131,
+          1584,
+          1237,
+          1725
+        ],
+        [
+          893,
+          1811,
+          1149,
+          1965
+        ]
+      ],
+      "sha256": "853b1ae8b75467bcc633fb5e16f2d758dd173e7861b64698636314cd0dc844af"
+    },
+    {
+      "filename": "16_use_checklist.png",
+      "category": "usage",
+      "label_ko": "체크리스트",
+      "source_bbox_xyxy": [
+        1392,
+        1576,
+        1957,
+        1987
+      ],
+      "trimmed_source_bbox_xyxy": [
+        1407,
+        1589,
+        1934,
+        1975
+      ],
+      "padding_px": 32,
+      "width": 591,
+      "height": 450,
+      "white_interior_preservation_regions": [
+        [
+          1685,
+          1669,
+          1933,
+          1973
+        ]
+      ],
+      "sha256": "3158fc07466d1a71065605bfa5afece3e42169adbf67fc26786326ea8de938e4"
+    },
+    {
+      "filename": "17_use_coffee.png",
+      "category": "usage",
+      "label_ko": "커피 한 잔",
+      "source_bbox_xyxy": [
+        208,
+        2096,
+        605,
+        2496
+      ],
+      "trimmed_source_bbox_xyxy": [
+        229,
+        2109,
+        594,
+        2473
+      ],
+      "padding_px": 32,
+      "width": 429,
+      "height": 428,
+      "white_interior_preservation_regions": [
+        [
+          477,
+          2264,
+          595,
+          2429
+        ]
+      ],
+      "sha256": "0ce1b7b2de35a444b7770006590d31a1d231fd5adfe46b4a9371160fd3a62d6f"
+    },
+    {
+      "filename": "18_use_message.png",
+      "category": "usage",
+      "label_ko": "응원 메시지",
+      "source_bbox_xyxy": [
+        789,
+        2099,
+        1331,
+        2504
+      ],
+      "trimmed_source_bbox_xyxy": [
+        807,
+        2122,
+        1311,
+        2489
+      ],
+      "padding_px": 32,
+      "width": 568,
+      "height": 431,
+      "white_interior_preservation_regions": [
+        [
+          901,
+          2115,
+          1315,
+          2456
+        ]
+      ],
+      "sha256": "ceda0e383c2786ba0f708baeb4c3beea0157cbc02ec42b4794f162271215a263"
+    },
+    {
+      "filename": "19_use_thanks.png",
+      "category": "usage",
+      "label_ko": "감사해요",
+      "source_bbox_xyxy": [
+        1416,
+        2091,
+        1971,
+        2512
+      ],
+      "trimmed_source_bbox_xyxy": [
+        1432,
+        2116,
+        1951,
+        2497
+      ],
+      "padding_px": 32,
+      "width": 583,
+      "height": 445,
+      "white_interior_preservation_regions": [
+        [
+          1533,
+          2245,
+          1840,
+          2451
+        ]
+      ],
+      "sha256": "9e8e6cc0f5b87591adad19188d03d9d8659cdedd1ae8969c51e0ff43deca550d"
+    },
+    {
+      "filename": "TIO_repaired_fullbody_transparent.png",
+      "category": "repaired",
+      "label_ko": "전신 발 복원",
+      "source_bbox_xyxy": [
+        2163,
+        2232,
+        2664,
+        2699
+      ],
+      "trimmed_source_bbox_xyxy": [
+        2163,
+        2242,
+        2664,
+        2684
+      ],
+      "padding_px": 32,
+      "width": 565,
+      "height": 506,
+      "white_interior_preservation_regions": [],
+      "source": "feet_fixed_sheet",
+      "sha256": "936c2c5b09a05436b4b7817b5ef196b60ba1183a96fc7f13925bb17c357d0166"
+    }
+  ]
+}
