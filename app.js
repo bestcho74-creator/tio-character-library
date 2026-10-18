@@ -296,7 +296,8 @@
     if (asset.type === 'gif' && playing && src) {
       return `<img src="${escapeHTML(src)}" alt="${escapeHTML(asset.title)} 움직이는 이미지"><button type="button" class="preview-media-control" data-media="${escapeHTML(asset.id)}" data-context="${context}">${icon('pause')}움직임 멈추기</button>`;
     }
-    const content = preview ? `<img src="${escapeHTML(preview)}" alt="${escapeHTML(asset.title)}" decoding="async">` : `<div class="preview-placeholder">${icon(asset.type === 'image' ? 'image' : 'play')}<span>${asset.type === 'image' ? '이미지 미리보기' : '눌러서 움직이는 이미지를 확인하세요'}</span></div>`;
+    const displaySource = context === 'modal' && asset.type === 'image' ? src : preview;
+    const content = displaySource ? `<img src="${escapeHTML(displaySource)}" alt="${escapeHTML(asset.title)}" decoding="async">` : `<div class="preview-placeholder">${icon(asset.type === 'image' ? 'image' : 'play')}<span>${asset.type === 'image' ? '이미지 미리보기' : '눌러서 움직이는 이미지를 확인하세요'}</span></div>`;
     return `${content}${asset.type !== 'image' && src ? `<button type="button" class="preview-media-control" data-media="${escapeHTML(asset.id)}" data-context="${context}">${icon('play')}${asset.type === 'gif' ? 'GIF 재생' : '영상 열기'}</button>` : ''}`;
   }
 
