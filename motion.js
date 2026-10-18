@@ -1,5 +1,5 @@
 /* Adapted from the user's supplied Deal to Grid and Planet Horizon sources.
- * One shared engine, real TIO assets, explicit playback, visibility and reduced-motion controls. */
+ * One shared engine, real TIO assets, one-pass motion, visibility and reduced-motion controls. */
 (() => {
   'use strict';
   const PALETTE = ['#FFFFFF', '#F3F3F3', '#E8E8E8', '#DADADA', '#FFB200', '#E41E26', '#2B2B2B', '#1D1D1F'];
@@ -64,22 +64,25 @@
   }
 
   function c4CardDeal(api) {
-    const LABEL = 'TEACHER CREATOR ASSOCIATION';   // 제목 위 작은 라벨
+    const LABEL = 'TIO CHARACTER';   // 제목 위 작은 라벨
     const TITLE = '캐릭터 활용 / 레퍼런스';       // 제목 (/ 는 줄바꿈)
     const NUMBERS = true;                    // 카드에 순서 번호 붙이기
     const LOOP = 10;                         // 한 바퀴 길이(초)
     const k = c4Kit(api), W = k.W, H = k.H, u = k.u, sp = k.stage();
-    const wide = k.shape === 'wide', tall = k.shape === 'tall';
-    const C = tall ? 3 : 4, R = tall ? 3 : 2, N = C * R;   // 가로·정방 4×2, 세로 3×3
-    // 격자를 놓을 자리: 가로 화면은 오른쪽, 나머지는 제목 아래
-    const area = wide ? [W * 0.36, H * 0.1, W * 0.6, H * 0.8] : [u * 0.07, H * (tall ? 0.25 : 0.34), W - u * 0.14, H * (tall ? 0.7 : 0.6)];
-    const fs = Math.max(12, wide ? Math.min(u * 0.085, W * 0.27 / 4.6) : Math.min(u * (tall ? 0.092 : 0.078), W * 0.8 / 9));
-    const gap = u * 0.024, cw = Math.min((area[2] - gap * (C - 1)) / C, ((area[3] - gap * (R - 1)) / R) * 0.75), ch = cw / 0.75;
-    const gx = area[0] + area[2] / 2 - W / 2, gy = wide ? area[1] + area[3] / 2 - H / 2 : (H * 0.07 + fs * 3.1 + H - u * 0.07) / 2 - H / 2;   // 세로·정방은 제목 아래 남은 자리의 가운데
+    const wide = W >= 540;
+    const C = 4, R = 2, N = C * R;
+    // Reserve a real 4-by-2 card region, including rotation and shadow clearance.
+    const pad = Math.max(10, u * 0.055);
+    const headingHeight = wide ? 0 : Math.max(40, H * 0.19);
+    const area = wide ? [W * 0.31, pad, W * 0.69 - pad, H - pad * 2] : [pad, headingHeight, W - pad * 2, H - headingHeight - pad];
+    const fs = wide ? Math.max(16, Math.min(25, W * 0.035)) : Math.max(13, Math.min(18, W * 0.041));
+    const gap = Math.max(6, u * 0.028);
+    const cw = Math.min((area[2] - gap * (C - 1)) / (C + 0.32), ((area[3] - gap) / (R + 0.24)) * 0.75), ch = cw / 0.75;
+    const gx = area[0] + area[2] / 2 - W / 2, gy = area[1] + area[3] / 2 - H / 2;
     const deck = [gx, gy];
     const cards = [];
     for (let i = 0; i < N; i++) {
-      const c = i % C, r = Math.floor(i / C), el = api.card(sp, k.pick(c, r, C), cw, ch);
+      const c = i % C, r = Math.floor(i / C), el = api.card(sp, i, cw, ch);
       el.style.boxShadow = k.shadow(cw, 0.32);
       if (i >= api.count) el.style.visibility = 'hidden';
       const chip = k.add(el, 'left:' + cw * 0.07 + 'px;top:' + cw * 0.07 + 'px;overflow:hidden;border-radius:' + cw * 0.025 + 'px;');
@@ -91,9 +94,9 @@
       });
     }
     // 제목: 라벨 + 두 줄 제목
-    const head = k.add(api.root, (wide ? 'left:' + W * 0.06 + 'px;top:50%;transform:translateY(-50%);' : 'left:' + u * 0.07 + 'px;top:' + H * (tall ? 0.07 : 0.07) + 'px;') + k.textOn(api.fg));
+    const head = k.add(api.root, (wide ? 'left:' + W * 0.04 + 'px;top:50%;transform:translateY(-50%);max-width:' + W * 0.24 + 'px;' : 'left:' + pad + 'px;top:' + pad + 'px;display:flex;align-items:center;gap:10px;') + 'pointer-events:none;' + k.textOn(api.fg));
     const tag = k.line(head, 'font:600 ' + Math.max(8, fs * 0.22) + 'px ' + k.fam('Noto Sans KR') + ';letter-spacing:0.22em;opacity:0.7;margin-bottom:' + fs * 0.38 + 'px;', LABEL);
-    const rows = TITLE.split('/').map(s => s.trim()).filter(Boolean).map(s => k.line(head, 'font:700 ' + fs + 'px ' + k.fam('Noto Sans KR') + ';letter-spacing:-0.03em;', s));
+    const rows = (wide ? TITLE.split('/') : ['캐릭터 활용 레퍼런스']).map(s => s.trim()).filter(Boolean).map(s => k.line(head, 'font:700 ' + fs + 'px ' + k.fam('Noto Sans KR') + ';letter-spacing:-0.03em;', s));
     const deal = 0.6, gap2 = Math.min(0.2, 1.8 / N), fly = 0.62, back0 = 7.2;   // 나눠 주기 시작 · 카드 사이 간격 · 나는 시간 · 모으기 시작(초)
     const dt = (back0 - 0.5 - (deal + (N - 1) * gap2 + fly + 0.4)) / N, a0 = deal + (N - 1) * gap2 + fly + 0.4 + dt * 0.5;   // 차례로 들리는 간격 · 시작
     return t => {
@@ -108,8 +111,15 @@
         const x = (1 - e) * (1 - e) * sx + 2 * e * (1 - e) * qx + e * e * c.x, y = (1 - e) * (1 - e) * sy + 2 * e * (1 - e) * qy + e * e * c.y;
         const flying = (go > 0 && go < 1) || (come > 0 && come < 1), lift = Math.sin(Math.PI * e) * (flying ? 1 : 0);
         const rot = c.rot * (1 - e) + c.bend * 14 * Math.sin(Math.PI * e);
-        const ph = (t - a0) / dt - i, b = ph > -0.5 && ph < 1.5 ? Math.pow(Math.sin(Math.PI * (ph + 0.5) / 2), 2) : 0;   // 차례가 된 카드가 살짝 들림
-        c.el.style.transform = 'translate(' + x.toFixed(2) + 'px,' + (y - b * u * 0.014).toFixed(2) + 'px) rotate(' + rot.toFixed(2) + 'deg) scale(' + (1 + 0.06 * lift + 0.035 * b).toFixed(4) + ')';
+        const ph = (t - a0) / dt - i, b = t < 4.9 && ph > -0.5 && ph < 1.5 ? Math.pow(Math.sin(Math.PI * (ph + 0.5) / 2), 2) : 0;   // 차례가 된 카드가 살짝 들림
+        const scale = 1 + 0.06 * lift + 0.035 * b;
+        const radians = rot * Math.PI / 180, clearance = Math.max(3, cw * 0.055);
+        const halfW = (Math.abs(Math.cos(radians)) * cw + Math.abs(Math.sin(radians)) * ch) * scale / 2 + clearance;
+        const halfH = (Math.abs(Math.sin(radians)) * cw + Math.abs(Math.cos(radians)) * ch) * scale / 2 + clearance;
+        const bound = (value, min, max) => Math.max(min, Math.min(max, value));
+        const safeX = bound(W / 2 + x, area[0] + halfW, area[0] + area[2] - halfW) - W / 2;
+        const safeY = bound(H / 2 + y - b * u * 0.014, area[1] + halfH, area[1] + area[3] - halfH) - H / 2;
+        c.el.style.transform = 'translate(' + safeX.toFixed(2) + 'px,' + safeY.toFixed(2) + 'px) rotate(' + rot.toFixed(2) + 'deg) scale(' + scale.toFixed(4) + ')';
         c.el.style.zIndex = flying ? 300 + i : e >= 1 ? (b > 0.01 ? 100 : 10 + i) : 200 - i;   // 나는 카드 > 더미 > 깔린 카드
         const ch2 = NUMBERS ? k.expo(k.seg(t, deal + i * gap2 + fly * 0.8, deal + i * gap2 + fly + 0.5)) * (1 - k.into(k.seg(t, back0 - 0.35, back0))) : 0;
         c.plate.style.transform = 'scaleX(' + ch2.toFixed(3) + ')';
@@ -364,7 +374,7 @@
     const MENU = ['원형', '표정', '포즈'];                                // 위 메뉴
     const NAV = '시작하기';                                                    // 위 오른쪽 작은 단추
     const LABEL = '교사크리에이터협회';                                            // 제목 위 작은 글
-    const TITLE = '캐릭터 레퍼 for AI';                                     // 큰 제목 (\n 줄바꿈)
+    const TITLE = 'TIO 캐릭터 레퍼런스';                                     // 큰 제목 (\n 줄바꿈)
     const BODY = '원형은 그대로, 창작은 더 다양하게.';                      // 설명
     const BUTTON = '레퍼런스 둘러보기';                                            // 단추 글자
     const LOOP = 12;                                                          // 한 바퀴 길이(초)
@@ -441,7 +451,7 @@
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
     const still = preference.matches;
     let frame = null, time = CFG.startAt || (still ? 4 : 0), last = 0, raf = 0, timer = 0, size = '';
-    let playing = false, seen = true, want = CFG.autoplay !== false && !still, drew = false;
+    let playing = false, seen = false, want = CFG.autoplay !== false && !still, drew = false;
     // 랜딩페이지용: 실제 마우스·스크롤에 반응합니다 (CONFIG.live). true = 페이지에 붙여 쓸 때, 'try' = 미리보기 창(마우스가 없으면 연출대로)
     const LIVE = !still && (CFG.live === true || CFG.live === 'try'), TRY = CFG.live === 'try';
     const live = { x: 0, y: 0, tx: 0, ty: 0, over: 0, on: false, down: 0, press: false, s: 0, ts: 0, ready: false };
@@ -654,7 +664,7 @@
 
   window.TIOMotion = {
     createDeal(root, options) {
-      return tioEngine(root, Object.assign({ speed: 1, radius: 0.06, bg: '#F3F3F3', colors: PALETTE, ratio: '16 / 9', autoplay: false, startAt: 4, once: 6.75, live: false }, options), c4CardDeal);
+      return tioEngine(root, Object.assign({ speed: 1, radius: 0.06, bg: '#F3F3F3', colors: PALETTE, ratio: '16 / 9', autoplay: true, startAt: 0, once: 4.9, live: false }, options), c4CardDeal);
     },
     createHorizon(root, options) {
       return tioEngine(root, Object.assign({ speed: 1, bg: '#F3F3F3', colors: PALETTE, ratio: '16 / 9', autoplay: true, startAt: 0, once: 3.6, live: false }, options), lpPlanetRim);

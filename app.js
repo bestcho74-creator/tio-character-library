@@ -58,6 +58,7 @@
   };
   const categoryLabel = id => categories.find(item => item.id === id)?.label || id || '레퍼런스';
   const promptString = value => typeof value === 'string' ? value : value?.text || value?.prompt || '';
+  const displayText = value => String(value ?? '').replace(/\s*[([{]\s*(?:검토본|발\s*복원)\s*[)\]}]/g, '').replace(/(?:검토본|발\s*복원)/g, '').replace(/\s{2,}/g, ' ').replace(/^[\s·|/—–-]+|[\s·|/—–-]+$/g, '').trim();
 
   const assets = (Array.isArray(catalog.assets) ? catalog.assets : []).map((item, index) => {
     const src = item.src || item.url || '';
@@ -70,9 +71,11 @@
     const thumbnail = item.thumbnail || item.poster || '';
     return {
       ...item, id, src, type, thumbnail,
-      title: item.title || item.name || '이름 없는 레퍼런스',
+      title: displayText(item.title || item.name) || 'TIO 레퍼런스',
+      description: displayText(item.description),
+      subcategory: displayText(item.subcategory),
       category: categoryAliases[item.category] || item.category || 'original',
-      tags: Array.isArray(item.tags) ? item.tags : [],
+      tags: Array.isArray(item.tags) ? item.tags.map(displayText).filter(Boolean) : [],
       metadata: item.metadata || {},
       transparent: item.transparent === true,
     };
@@ -86,7 +89,6 @@
   let toastTimer;
   let dealEngine = null;
   let horizonEngine = null;
-  let dealStarted = false;
   const dialogFocus = new Map();
 
   function renderIcons(root = document) {
@@ -223,6 +225,7 @@
     if (!pageAssets.some(asset => asset.id === state.selectedId)) state.selectedId = pageAssets[0]?.id || '';
     $('#resultCount').textContent = `${filtered.length}개`;
     const useDeal = state.category === 'samples' && pageAssets.length && window.TIOMotion;
+    $('#galleryView').classList.toggle('is-deal-view', !!useDeal);
     $('#dealSection').hidden = !useDeal;
     $('#assetGrid').hidden = !!useDeal;
     if (dealEngine) { dealEngine.destroy(); dealEngine = null; }
@@ -238,19 +241,12 @@
     renderDetail();
   }
 
-  function setDealState(playing) {
-    $('#dealToggle').innerHTML = `${icon(playing ? 'pause' : 'play')}<span>${playing ? '일시정지' : '모션 재생'}</span>`;
-    $('#dealToggle').setAttribute('aria-label', playing ? '카드 모션 일시정지' : '카드 모션 재생');
-  }
-
   function renderDeal(items) {
-    dealStarted = false;
-    setDealState(false);
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     $('#dealHint').textContent = reduced ? '동작 줄이기 설정으로 정지된 카드가 표시돼요.' : '카드를 선택하면 이미지와 프롬프트를 볼 수 있어요.';
     dealEngine = window.TIOMotion.createDeal($('#dealStage'), {
       images: items.map(staticPreview), items,
-      onSelect: id => selectAsset(id), onState: setDealState,
+      onSelect: id => selectAsset(id),
     });
     dealEngine.select(state.selectedId);
     $('#dealAssetNames').innerHTML = items.map(asset => `<button type="button" data-asset="${escapeHTML(asset.id)}" aria-pressed="${state.selectedId === asset.id}">${escapeHTML(asset.title)}</button>`).join('');
@@ -286,19 +282,7 @@
       preference.addEventListener('change', () => { heroVideo.loop = !preference.matches; if (preference.matches) heroVideo.pause(); });
       playVisible();
     }
-    if (!window.TIOMotion) { $('#heroMotionToggle').disabled = true; $('#heroMotionReplay').disabled = true; return; }
-    horizonEngine = window.TIOMotion.createHorizon($('#heroHorizon'), {
-      onState: playing => {
-        $('#heroMotionToggle').innerHTML = icon(playing ? 'pause' : 'play');
-        $('#heroMotionToggle').setAttribute('aria-label', playing ? '배경 모션 일시정지' : '배경 모션 재생');
-      },
-    });
-    if (!horizonEngine.isPlaying()) { $('#heroMotionToggle').innerHTML = icon('play'); $('#heroMotionToggle').setAttribute('aria-label', '배경 모션 재생'); }
-  }
-
-  function statusLabel(asset) {
-    const status = asset?.metadata?.status || asset?.status || catalog.status || 'review';
-    return ['approved', 'confirmed'].includes(status) ? { text: '승인본', className: 'approved' } : { text: '검토본', className: '' };
+    if (window.TIOMotion) horizonEngine = window.TIOMotion.createHorizon($('#heroHorizon'));
   }
 
   function renderMedia(asset, context) {
@@ -348,13 +332,11 @@
     const asset = getAsset();
     const panel = $('#detailPanel');
     if (!asset) { panel.innerHTML = `<div class="detail-empty">${icon('image')}<span>이미지를 선택하면<br>다운로드와 프롬프트가 나타나요.</span></div>`; return; }
-    const status = statusLabel(asset);
-    panel.innerHTML = `<div class="detail-topline"><span>SELECTED REFERENCE</span><span class="detail-status ${status.className}">${status.text}</span></div><div class="detail-preview ${asset.transparent ? 'checkerboard' : ''}" data-media-region="detail">${renderMedia(asset, 'detail')}<button type="button" class="icon-button preview-expand" data-expand="${escapeHTML(asset.id)}" aria-label="이미지 크게 보기">${icon('expand')}</button></div><div class="detail-body">${renderDetailBody(asset)}</div>`;
+    panel.innerHTML = `<div class="detail-topline"><span>SELECTED REFERENCE</span></div><div class="detail-preview ${asset.transparent ? 'checkerboard' : ''}" data-media-region="detail">${renderMedia(asset, 'detail')}<button type="button" class="icon-button preview-expand" data-expand="${escapeHTML(asset.id)}" aria-label="이미지 크게 보기">${icon('expand')}</button></div><div class="detail-body">${renderDetailBody(asset)}</div>`;
   }
 
   function renderAssetModal(asset) {
-    const status = statusLabel(asset);
-    $('#modalAssetContent').innerHTML = `<div class="modal-preview-area ${asset.transparent ? 'checkerboard' : ''}" data-media-region="modal">${renderMedia(asset, 'modal')}</div><div class="modal-info"><span class="detail-status ${status.className}" style="align-self:flex-start">${status.text}</span>${renderDetailBody(asset, true)}</div>`;
+    $('#modalAssetContent').innerHTML = `<div class="modal-preview-area ${asset.transparent ? 'checkerboard' : ''}" data-media-region="modal">${renderMedia(asset, 'modal')}</div><div class="modal-info">${renderDetailBody(asset, true)}</div>`;
   }
 
   function openDialog(dialog) {
@@ -531,8 +513,6 @@
     const logo = safeURL(catalog.brand?.logoSrc || catalog.logoSrc);
     if (logo) $('#brandSymbol').innerHTML = `<img src="${escapeHTML(logo)}" alt="">`;
     const version = catalog.version ? String(catalog.version).replace(/^v/i, '') : '';
-    const status = statusLabel();
-    $('#versionPill').textContent = `${status.text}${version ? ` · v${version}` : ''}`;
     $('#footerVersion').textContent = `TIO CHARACTER LIBRARY${version ? ` · v${version}` : ''}`;
     const master = getAsset(catalog.masterAssetId) || firstAsset;
     const file = getDownloads(master)[0];
@@ -646,18 +626,6 @@
     const text = `[TIO 재현 작업 설정]\n내부 관리 ID: ${metadataValue(meta.internalId)}\n작업용 고정 시드: ${metadataValue(meta.workingSeed ?? catalog.workingSeed)}\n원본 생성 시드: ${exists(meta.seed) ? meta.seed : '미제공'}\n원본 생성 ID: ${metadataValue(meta.jobId)}\nHiggsfield 캐릭터 ID: ${metadataValue(characterId)}${characterId ? `\n등록 계정의 Higgsfield 지원 모델용 참조 토큰: <<<${characterId}>>>` : ''}\n\n고정 원형 이미지를 참고 이미지로 함께 첨부하세요. 시드를 지원하는 모델에서는 위 작업용 고정 시드를 설정에 입력하고, 같은 모델·버전·생성 설정을 유지하세요. 작업용 고정 시드는 원본 시드를 복원한 값이 아니며 동일한 외형을 보장하지 않습니다. Higgsfield 캐릭터 ID와 참조 토큰은 등록한 Higgsfield 계정의 지원 모델에서만 사용하세요. 다른 AI에서는 원형 이미지 첨부와 마스터 프롬프트를 기준으로 작업하세요.`;
     copyText(text, '작업용 시드와 참조 ID를 포함한 재현 설정을 복사했어요.');
   });
-  $('#heroMotionToggle').addEventListener('click', () => {
-    if (!horizonEngine) return;
-    if (horizonEngine.isPlaying()) horizonEngine.pause(); else horizonEngine.play();
-  });
-  $('#heroMotionReplay').addEventListener('click', () => { if (horizonEngine) { horizonEngine.restart(); horizonEngine.play(); } });
-  $('#dealToggle').addEventListener('click', () => {
-    if (!dealEngine) return;
-    if (dealEngine.isPlaying()) dealEngine.pause();
-    else { if (!dealStarted) { dealEngine.restart(); dealStarted = true; } dealEngine.play(); }
-  });
-  $('#dealReplay').addEventListener('click', () => { if (dealEngine) { dealEngine.restart(); dealStarted = true; dealEngine.play(); } });
-
   $$('.prompt-tabs button').forEach((button, index, buttons) => button.addEventListener('keydown', event => {
     let next;
     if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
